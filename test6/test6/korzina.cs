@@ -23,6 +23,8 @@ namespace test6
         {
             InitializeComponent();
             //tableLayoutPanel1.Controls.Add()
+            MaximumSize = new Size(Size.Width, Size.Height);
+            MinimumSize = new Size(Size.Width, Size.Height);
             if (test123.role == 5)
                 createAll();
             if (test123.role == 3)
@@ -32,7 +34,7 @@ namespace test6
 
         public void changehook()
         {
-
+            tableLayoutPanel1.ColumnCount = 5;
             string[] files = Directory.GetFiles(test123.pathScl);
             int countTovars = files.Length;
 
@@ -58,8 +60,7 @@ namespace test6
                 Button declineKorz = new Button() { Name = $"button{i}", Text = "✗", Size = new Size(100, 23) };
                 Button acceptKorz = new Button() { Name = $"buttonA{i}", Text = "✓", Size = new Size(100, 23) };
                 Label labelPriceCount = new Label() { Name = $"allprice{i}", Text = allprice };
-                NumericUpDown numCount = new NumericUpDown() { Name = $"count{i}", Value = count, ReadOnly = true };
-                numCount.ValueChanged += new EventHandler(updatepriceAll);
+                Label numCount = new Label() { Name = $"count{i}", Text = count.ToString()};
                 declineKorz.Click += new EventHandler(decline_Click);
                 acceptKorz.Click += new EventHandler(accept_Click); 
                 tableLayoutPanel1.Controls.Add(labelPriceCount, 4, i);
@@ -82,9 +83,28 @@ namespace test6
         {
             for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
             {
+                string wasCount;
                 Label name = Controls.Find($"name{i}", true).FirstOrDefault() as Label;
+                Label group = Controls.Find($"group{i}", true).FirstOrDefault() as Label;
+                Label count = Controls.Find($"count{i}", true).FirstOrDefault() as Label;
+                Label price = Controls.Find($"price{i}", true).FirstOrDefault() as Label;
+                using (BinaryReader reader = new BinaryReader(File.Open(Directory.GetCurrentDirectory() + $@"\debug\sclad\{group.Text}\{name.Text}.dat", FileMode.Open)))
+                {
+                    reader.ReadString();
+                    reader.ReadString();
+                    wasCount = reader.ReadString();
+                    reader.ReadString();
+                }
+                using (BinaryWriter writer = new BinaryWriter(File.Open(Directory.GetCurrentDirectory() + $@"\debug\sclad\{group.Text}\{name.Text}.dat",FileMode.Open)))
+                {
+                    writer.Write(name.Text);
+                    writer.Write(price.Text);
+                    writer.Write((int.Parse(count.Text)+int.Parse(wasCount)).ToString());
+                    writer.Write(group.Text);
+                }
                 File.Delete(test123.pathScl + $"{name.Text}.dat");
             }
+
             Directory.Delete(test123.pathScl);
             MessageBox.Show($"Заказ был успешно отменен", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -102,6 +122,21 @@ namespace test6
             string mail = kek.Split('\\')[kek.Split('\\').Length - 2];
             MessageBox.Show($"Письмо с чеком было отправлено покупателю на почту на почту {mail}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
+            string path;
+            DateTime dt = DateTime.Now;
+            int moneys=0;
+            path = Directory.GetCurrentDirectory() + $@"\debug\moneylog\{dt.Day}.{dt.Month}.{dt.Year}.dat";
+            if (File.Exists(path))
+            {
+                using (BinaryReader reader = new BinaryReader(File.Open(path, FileMode.OpenOrCreate)))
+                {
+                    moneys = int.Parse(reader.ReadString());
+                }
+            }
+            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.OpenOrCreate)))
+            {
+                writer.Write((totalPrice+moneys).ToString());
+            }
 
 
         }
@@ -119,7 +154,7 @@ namespace test6
             string name, price, group, allprice;
 
             int count;
-
+            tableLayoutPanel1.ColumnCount = 6;
 
             for (int i = 0; i < countTovars; i++)
             {

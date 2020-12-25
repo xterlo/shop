@@ -19,12 +19,15 @@ namespace test6
         {
 
             InitializeComponent();
-            
-            if(test123.role == 3)
+            MaximumSize = new Size(Size.Width, Size.Height);
+            MinimumSize = new Size(Size.Width, Size.Height);
+
+            if (test123.role == 3)
             {
                 getpathbuy();
                 okButton.Click -= new EventHandler(okButton_Click);
                 okButton.Click += new EventHandler(okButton_zakazi);
+                test123.scladInfo = false;
             }
             else
             {

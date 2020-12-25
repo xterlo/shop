@@ -19,6 +19,8 @@ namespace test6
         public Form4()
         {
             InitializeComponent();
+            MaximumSize = new Size(Size.Width, Size.Height);
+            MinimumSize = new Size(Size.Width, Size.Height);
             string[] roles = { "admin", "cadr", "sclad", "kasprod", "buhg", "pokyp" };
         }
         private void admin_Click(object sender, EventArgs e)

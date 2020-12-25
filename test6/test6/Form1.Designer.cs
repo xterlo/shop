@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.redButton = new System.Windows.Forms.Button();
+            this.guestEnter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // enterButton
@@ -64,11 +65,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 94);
+            this.label1.Location = new System.Drawing.Point(31, 94);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Логин:";
+            this.label1.Text = "e-mail или Логин:";
             // 
             // label2
             // 
@@ -89,11 +90,22 @@
             this.redButton.UseVisualStyleBackColor = true;
             this.redButton.Click += new System.EventHandler(this.redButton_Click);
             // 
+            // guestEnter
+            // 
+            this.guestEnter.Location = new System.Drawing.Point(75, 254);
+            this.guestEnter.Name = "guestEnter";
+            this.guestEnter.Size = new System.Drawing.Size(156, 23);
+            this.guestEnter.TabIndex = 6;
+            this.guestEnter.Text = "Войти как гость";
+            this.guestEnter.UseVisualStyleBackColor = true;
+            this.guestEnter.Click += new System.EventHandler(this.guestEnter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 340);
+            this.Controls.Add(this.guestEnter);
             this.Controls.Add(this.redButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -102,6 +114,7 @@
             this.Controls.Add(this.enterButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,6 +128,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button redButton;
+        private System.Windows.Forms.Button guestEnter;
     }
 }
 

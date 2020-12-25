@@ -27,15 +27,23 @@ namespace test6
         {
             
             InitializeComponent();
-
+            MaximumSize = new Size(Size.Width, Size.Height);
+            MinimumSize = new Size(Size.Width, Size.Height);
             count.Location = new Point(130, 100);
             count.Size = new Size(60, 13);
             count.Name = "counter";
             count.ReadOnly = true;
+            count.ValueChanged += new EventHandler(changeMax);
             obrLabel.Hide();
             Controls.Add(count);
             count.Hide();
 
+        }
+        public void changeMax(object sender,EventArgs e)
+        {
+            var a = (sender as NumericUpDown);
+            a.Maximum = a.Value;
+            a.Minimum = a.Value;
         }
         public void addList(string filePath)
         {
@@ -51,7 +59,7 @@ namespace test6
             }
             catch
             {
-                Directory.CreateDirectory(filep);
+                    Directory.CreateDirectory(filep);
                 files = Directory.GetFiles(filep);
             }
 
@@ -90,8 +98,11 @@ namespace test6
 
         public void redact_Click(object sender, EventArgs e)
         {
-            File.Copy(filep + $@"\{loginLabel.Text}.dat", filep + $@"\temp_{loginLabel.Text}.dat");
-            File.Delete(filep + $@"\{loginLabel.Text}.dat");
+
+            //File.Move(filep + $@"\{pickUser.Text}.dat", filep + $@"\temp_{pickUser.Text}.dat");
+
+
+            File.Delete(filep + $@"\{pickUser.Text}.dat");
             Form3 modif = new Form3();
             modif.fio.Text = fioLabel.Text;
             modif.age.Text = ageLabel.Text;
@@ -103,6 +114,10 @@ namespace test6
             modif.login.Text = loginLabel.Text;
             modif.password.Text = passwordLabel.Text;
             modif.button.Text = "Редактировать";
+            if (test123.role == 1)
+            {
+                modif.password.Enabled = false;
+            }
             modif.ShowDialog();
             try
             {
@@ -118,7 +133,7 @@ namespace test6
         private void delUser_Click(object sender, EventArgs e)
         {
             Directory.CreateDirectory(filep + $@"\delete\");
-            File.Move(filep + $@"\{loginLabel.Text}.dat", filep + $@"\delete\{loginLabel.Text}.dat");
+            File.Move(filep + $@"\{pickUser.Text}.dat", filep + $@"\delete\{pickUser.Text}.dat");
             clearAll();
             
         }
@@ -140,18 +155,22 @@ namespace test6
         }
         void updateInfo()
         {
+
             if (deleted == true)
             {
                 redact.Text = "Восстановить";
                 redact.Click -= new System.EventHandler(redact_Click);
+                redact.Click -= new System.EventHandler(restoreUser);
                 redact.Click += new System.EventHandler(restoreUser);
                 delUser.Text = "Удалить полностью";
                 delUser.Click -= new System.EventHandler(delUser_Click);
+                delUser.Click -= new System.EventHandler(removeUser);
                 delUser.Click += new System.EventHandler(removeUser);
             }
             else
             {
                 redact.Text = "Редактировать";
+                redact.Click -= new System.EventHandler(redact_Click);
                 redact.Click += new System.EventHandler(redact_Click);
                 redact.Click -= new System.EventHandler(restoreUser);
                 delUser.Text = "Удалить";
@@ -170,7 +189,10 @@ namespace test6
                 zpLabel.Text = reader.ReadString();
                 loginLabel.Text = reader.ReadString();
                 passwordLabel.Text = reader.ReadString();
+                obrLabel.Visible = true;
             }
+            if (test123.role == 1)
+                passwordLabel.Hide();
             roleindex = Array.IndexOf(rolesNormal, roleLabel.Text);
         }
         void updateInfoSclad()
@@ -180,6 +202,7 @@ namespace test6
             {
                 redact.Text = "Восстановить";
                 redact.Click -= new System.EventHandler(redact_Click);
+                redact.Click -= new System.EventHandler(restoreUser);
                 redact.Click += new System.EventHandler(restoreUser);
                 delUser.Text = "Удалить полностью";
                 delUser.Click -= new System.EventHandler(delUser_Click);
@@ -188,9 +211,11 @@ namespace test6
             else
             {
                 redact.Text = "Сохранить";
+                redact.Click -= new System.EventHandler(saveTovar);
                 redact.Click += new System.EventHandler(saveTovar);
                 redact.Click -= new System.EventHandler(restoreUser);
                 delUser.Text = "Удалить";
+                delUser.Click -= new System.EventHandler(delTovar);
                 delUser.Click += new System.EventHandler(delTovar);
                 delUser.Click -= new System.EventHandler(removeUser);
             }
@@ -209,12 +234,13 @@ namespace test6
         public void updateForUser()
         {
 
-            
+            count.ValueChanged -= new EventHandler(changeMax);
             //redact.Text = "Сохранить";
             //redact.Click += new System.EventHandler(saveTovar);
             //redact.Click -= new System.EventHandler(restoreUser);
             redact.Hide();
             delUser.Text = "В корзину";
+            delUser.Click -= new System.EventHandler(toKorzina);
             delUser.Click += new System.EventHandler(toKorzina);
             delUser.Click -= new System.EventHandler(removeUser);
             using (BinaryReader reader = new BinaryReader(File.OpenRead($@"{filep}\{pickUser.Text}.dat")))
@@ -278,6 +304,7 @@ namespace test6
                 writer.Write((fromFile - buy).ToString());
                 writer.Write(expLabel.Text);
             }
+            Close();
             
         }
 

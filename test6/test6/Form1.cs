@@ -14,6 +14,7 @@ namespace test6
 
     struct Person
     {
+        
         public static string fio;
         public static string age;
         public static string obrazovanie;
@@ -38,6 +39,7 @@ namespace test6
     }
     public partial class Form1 : Form
     {
+        
         string[] roles = { "Администратор", "Кадры", "Склад", "Кассир-продавец", "Бухгалтер", "Покупатель" };
         string[] rolesNorm = { "admin", "cadr", "sclad", "kasprod", "buhg", "pokyp" };
         public string login { get; set; }
@@ -49,6 +51,12 @@ namespace test6
         {
             if (Directory.Exists(pathMain) == false)
             {
+                Directory.CreateDirectory(pathMain + @"\moneylog\");
+                using(BinaryWriter writer = new BinaryWriter(File.Open(pathMain + $@"\moneylog\{DateTime.Now.Day}.{DateTime.Now.Month}.{DateTime.Now.Year}.start.dat",FileMode.OpenOrCreate)))
+                {
+                    writer.Write("0");
+                }
+                test123.startmagaz = DateTime.Now;
                 Directory.CreateDirectory(pathUser + @"\admin\");
                 Directory.CreateDirectory(pathUser + @"\cadr\");
                 Directory.CreateDirectory(pathUser + @"\sclad\");
@@ -72,23 +80,38 @@ namespace test6
                     writer.Write("15 лет");
                     writer.Write("admin");
                     writer.Write("Марс");
-                    writer.Write("15к");
+                    writer.Write("60900");
                     writer.Write("admin");
                     writer.Write("admin");
                 }        
             }
+            string[] files = Directory.GetFiles(pathMain + $@"\moneylog\");
+            foreach (string file in files)
+            {
+                string[] tempFile = file.Split('\\')[file.Split('\\').Length - 1].Split('.');
+                if (tempFile[3] == "start")
+                {
+                    string allFile = $"{tempFile[0]}-{tempFile[1]}-{tempFile[2]}";
+                    test123.startmagaz = (DateTime)Convert.ChangeType(allFile, typeof(DateTime));
+                }
+            }
             InitializeComponent();
+            MaximumSize =new Size(Size.Width, Size.Height);
+            MinimumSize =new Size(Size.Width, Size.Height);
 
         }
 
         private void enterButton_Click(object sender, EventArgs e)
         {
+            test123.reg = false;
 
             role = finder(loginString.Text, passwordString.Text);
             if (role != 900)
             {
                 test123.role = role;
+                test123.guest = false;
                 Form2 mainMenu = new Form2();
+            
                 mainMenu.textRole.Text = roles[role];
                 Hide();
                 mainMenu.Show();
@@ -118,32 +141,33 @@ namespace test6
                     string logintemp="";
                     string role__="";
                     int fileLen = file.Split('\\').Length;
-                    if (file.Split('\\')[fileLen - 1] == $@"{login}.dat")
-                    {
+                    string log="";
+                    //if (file.Split('\\')[fileLen - 1] == $@"{login}.dat")
+                    //{
                         using (BinaryReader reader = new BinaryReader(File.Open(file, FileMode.Open)))
                         {
                             while (reader.PeekChar() > -1)
                             {
 
-                                string junk = reader.ReadString();
-                                junk = reader.ReadString();
-                                junk = reader.ReadString();
-                                junk = reader.ReadString();
+                                log = reader.ReadString();
+                                reader.ReadString();
+                                reader.ReadString();
+                                reader.ReadString();
                                 role__ = reader.ReadString();
-                                junk = reader.ReadString();
-                                junk = reader.ReadString();
+                                reader.ReadString();
+                                reader.ReadString();
                                 logintemp = reader.ReadString();
                                 psswd = reader.ReadString();
                                 
                             }
-                            if (psswd == password)
+                            if (psswd == password && (loginString.Text == logintemp || loginString.Text == log))
                             {
                                 test123.namepokyp = logintemp;
                                 result = Array.IndexOf(rolesNorm,role__);
                                 break;
                             }
                         }
-                    }
+                    //}
                 }
             }
             return result;
@@ -153,6 +177,8 @@ namespace test6
         {
             test123.reg = true;
             Form3 reg = new Form3();
+            reg.label1.Text = "Логин: ";
+            reg.label3.Text = "Почта: ";
             reg.label8.Hide();
             reg.label9.Hide();
             reg.label4.Hide();
@@ -168,8 +194,23 @@ namespace test6
             reg.Size = new Size(347,300);
             reg.label3.Text = "Почта";
             reg.label2.Text = "Пароль";
+            reg.exp.PasswordChar = '*';
             
             reg.ShowDialog();
+        }
+
+        private void guestEnter_Click(object sender, EventArgs e)
+        {
+            test123.guest = true;
+            Form2 f = new Form2();
+            Hide();
+            f.textRole.Text = "Гость";
+            f.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -35,6 +35,7 @@
             this.findTovar = new System.Windows.Forms.Button();
             this.addTovar = new System.Windows.Forms.Button();
             this.dohodi = new System.Windows.Forms.Button();
+            this.logout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // createUser
@@ -105,11 +106,23 @@
             this.dohodi.UseVisualStyleBackColor = true;
             this.dohodi.Click += new System.EventHandler(this.dohodi_Click);
             // 
+            // logout
+            // 
+            this.logout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.logout.Location = new System.Drawing.Point(713, 414);
+            this.logout.Name = "logout";
+            this.logout.Size = new System.Drawing.Size(75, 23);
+            this.logout.TabIndex = 7;
+            this.logout.Text = "Выход";
+            this.logout.UseVisualStyleBackColor = true;
+            this.logout.Click += new System.EventHandler(this.logout_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.logout);
             this.Controls.Add(this.dohodi);
             this.Controls.Add(this.addTovar);
             this.Controls.Add(this.findTovar);
@@ -118,7 +131,7 @@
             this.Controls.Add(this.textRole);
             this.Controls.Add(this.createUser);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "Главное меню";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,5 +147,6 @@
         private System.Windows.Forms.Button findTovar;
         private System.Windows.Forms.Button addTovar;
         private System.Windows.Forms.Button dohodi;
+        private System.Windows.Forms.Button logout;
     }
 }
