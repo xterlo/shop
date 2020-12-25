@@ -74,7 +74,7 @@ namespace test6
                 Directory.CreateDirectory(pathSclad);
                 using (BinaryWriter writer = new BinaryWriter(File.Open(pathUser + @"admin\admin.dat", FileMode.OpenOrCreate)))
                 {
-                    writer.Write("Шорин Евгений Максимович");
+                    writer.Write("Слободянюк Игорь Сергеевич");
                     writer.Write("17");
                     writer.Write("Высшее");
                     writer.Write("15 лет");

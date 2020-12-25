@@ -308,6 +308,7 @@ namespace test6
             addtov.label1.Text = "Название:";
             addtov.label5.Text = "Цена:";
             addtov.label3.Text = "Кол-во:";
+            addtov.adtov = "tov";
             addtov.label2.Text = "Категория:";
             Label lb1 = new Label() { Location = new Point(1, 230), Name = "allprice"};
             Label lb2= new Label() { Location = new Point(1, 200), Text = "Сумма заказа (без наценки): " ,Size = new Size(200,25)};
@@ -334,6 +335,7 @@ namespace test6
             addtov.button.Click -= new System.EventHandler(addtov.button_Click);
             addtov.button.Click -= new System.EventHandler(addtov.addtov);
             addtov.button.Click += new System.EventHandler(addtov.addtov);
+            addtov.button.Text = "Заказать";
             
             addtov.ShowDialog();
 

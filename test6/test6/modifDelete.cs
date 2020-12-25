@@ -33,18 +33,12 @@ namespace test6
             count.Size = new Size(60, 13);
             count.Name = "counter";
             count.ReadOnly = true;
-            count.ValueChanged += new EventHandler(changeMax);
             obrLabel.Hide();
             Controls.Add(count);
             count.Hide();
 
         }
-        public void changeMax(object sender,EventArgs e)
-        {
-            var a = (sender as NumericUpDown);
-            a.Maximum = a.Value;
-            a.Minimum = a.Value;
-        }
+
         public void addList(string filePath)
         {
             string[] files;
@@ -224,17 +218,19 @@ namespace test6
             {
                 fioLabel.Text = reader.ReadString();
                 ageLabel.Text = reader.ReadString();
-                count.Value = int.Parse(reader.ReadString());
+                int minmax = int.Parse(reader.ReadString());
+                count.Maximum = minmax;
+                count.Minimum = minmax;
+                count.Value = minmax;
+
                 expLabel.Text = reader.ReadString();
             }
-            
+
             count.Show();
         }
 
         public void updateForUser()
         {
-
-            count.ValueChanged -= new EventHandler(changeMax);
             //redact.Text = "Сохранить";
             //redact.Click += new System.EventHandler(saveTovar);
             //redact.Click -= new System.EventHandler(restoreUser);

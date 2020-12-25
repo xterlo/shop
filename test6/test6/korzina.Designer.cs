@@ -92,6 +92,7 @@
             this.Controls.Add(this.button1);
             this.Name = "korzina";
             this.Text = "korzina";
+            this.Load += new System.EventHandler(this.korzina_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

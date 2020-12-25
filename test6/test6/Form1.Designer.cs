@@ -113,7 +113,7 @@
             this.Controls.Add(this.loginString);
             this.Controls.Add(this.enterButton);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "*";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

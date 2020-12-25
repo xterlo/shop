@@ -15,10 +15,10 @@ namespace test6
     public partial class Form3 : Form
     {
         int role;
-        string delRole;
+        string delRole = "";
         string pathsclad;
-        string adtov = "nottov";
-        bool notClose = false;
+        public string adtov = "nottov";
+        bool notClose = true;
         string[] roles = { "admin","cadr", "sclad", "kasprod", "buhg", "pokyp" };
         public Form3()
         {
@@ -285,9 +285,7 @@ namespace test6
         }
         public void button_Click(object sender, EventArgs e)
         {
-            save();
-
-           
+            save();     
         }
 
         public void save()
@@ -429,16 +427,22 @@ namespace test6
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if ((fio.Text.Length > 0 || age.Text.Length > 0 || exp.Text.Length > 0 || obrazovanie.Text.Length > 0 || comboBox1.Text.Length > 0 || place.Text.Length > 0 || zp.Text.Length > 0 ||
-                login.Text.Length > 0 || password.Text.Length > 0) && adtov == "nottov")
+
+            if ((fio.Text.Length < 1 && age.Text.Length < 1 && exp.Text.Length < 1 && obrazovanie.Text.Length < 1 && comboBox1.Text.Length < 1 && place.Text.Length < 1 && zp.Text.Length < 1 &&
+                login.Text.Length < 1 && password.Text.Length < 1) && adtov == "nottov")
             {
-                delRole = "bad";
-                notClose = true;
+                delRole = "nice";
+                notClose = false;
             }
             else if(adtov == "tov")
             {
                 delRole = "nice";
                 notClose = false;
+            }
+            else
+            {
+                delRole = "bad";
+                notClose = true;
             }
             if (delRole != "nice")
                 save();

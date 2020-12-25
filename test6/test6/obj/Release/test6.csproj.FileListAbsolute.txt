@@ -14,3 +14,19 @@ C:\Users\xterl\source\repos\test6\test6\obj\Release\test6.csproj.GenerateResourc
 C:\Users\xterl\source\repos\test6\test6\obj\Release\test6.csproj.CoreCompileInputs.cache
 C:\Users\xterl\source\repos\test6\test6\obj\Release\test6.exe
 C:\Users\xterl\source\repos\test6\test6\obj\Release\test6.pdb
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\bin\Release\test6.exe.config
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\bin\Release\test6.exe
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\bin\Release\test6.pdb
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.csprojAssemblyReference.cache
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Form1.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Form2.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Form3.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Form4.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Form5.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.korzina.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.Properties.Resources.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.modifDelete.resources
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.csproj.GenerateResource.cache
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.csproj.CoreCompileInputs.cache
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.exe
+C:\Users\Is55\Desktop\DZ\ОАиП\ПР 8\t\test6\obj\Release\test6.pdb

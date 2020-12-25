@@ -69,6 +69,7 @@ namespace test6
                 tableLayoutPanel1.Controls.Add(labelName, 1, i);
                 tableLayoutPanel1.Controls.Add(labelGroup, 0, i);
                 totalPrice += int.Parse(allprice);
+                allPrice.Text = totalPrice.ToString();
                 button1.Hide();
                 Controls.Add(declineKorz);
                 Controls.Add(acceptKorz);
@@ -283,6 +284,11 @@ namespace test6
             }
             Close();
                 //Directory.GetCurrentDirectory() + $@"\debug\user\korzina\{test123.namepokyp}\{lb.Text}.dat"
+        }
+
+        private void korzina_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
